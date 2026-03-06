@@ -1,0 +1,16 @@
+[project]
+name = "mouse-click-service"
+version = "0.1.0"
+description = "Windows系统托盘鼠标点击服务，防止系统休眠"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pyautogui>=0.9.54",
+    "pystray>=0.19.5",
+    "pillow>=10.0.0",
+    "pyinstaller>=6.18.0",
+    "keyboard>=0.13.5",
+]
+
+[project.scripts]
+mouse-click-service = "mouse_click_service:main"
