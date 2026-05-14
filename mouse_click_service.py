@@ -179,7 +179,7 @@ class TrayApp:
         self._icon = None
         self._hotkey_remove = None  # 仅用于标记是否已注册
 
-    HOTKEY = "ctrl+f10"
+    HOTKEY = "ctrl+shift+f10"
 
     def _toggle_service(self, icon, item):
         """切换服务状态"""
@@ -224,18 +224,18 @@ class TrayApp:
                 new_state = "已启动"
             if self._icon:
                 self._icon.update_menu()
-                self._icon.notify(f"服务{new_state}", "鼠标点击服务 (Ctrl+F10)")
+                self._icon.notify(f"服务{new_state}", "鼠标点击服务 (Ctrl+Shift+F10)")
 
         threading.Thread(target=do_toggle, daemon=True).start()
 
     def _register_hotkey(self):
-        """注册全局快捷键 Ctrl+F10"""
+        """注册全局快捷键 Ctrl+Shift+F10"""
         if keyboard is None:
             return
         try:
             keyboard.add_hotkey(self.HOTKEY, self._on_hotkey)
             self._hotkey_remove = True
-            logger.info("已注册全局快捷键 Ctrl+F10")
+            logger.info("已注册全局快捷键 Ctrl+Shift+F10")
         except Exception as e:
             logger.warning("注册全局快捷键失败: %s", e)
 
@@ -286,7 +286,7 @@ class TrayApp:
         # 将图标引用传递给服务
         self.service._icon = self._icon
 
-        # 注册全局快捷键 Ctrl+F10
+        # 注册全局快捷键 Ctrl+Shift+F10
         self._register_hotkey()
 
         # 自动启动服务
